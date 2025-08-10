@@ -3,7 +3,7 @@
 #include "headers/functions.h"
 #include "resources/backgrounds.h"
 #include "resources/objetos.h"
-
+#define PlayBGM(songNum) ((void (*)(u16))(0x080722A0 | 1))(songNum)
 const struct OamData hide_oam = {
     .x = -32,
     .y = -32,
@@ -73,7 +73,7 @@ bool intro_main()
 			load_bg_data(3, &BG_1Tiles, &BG_1Map);
 			load_bg_data(2, &BG_2Tiles, &BG_2Map);		
 			load_bg_data(1, &BG_3Tiles, &BG_3Map);		
-		    load_sprite(&centro_oam, &OBJ_0Tiles, Sol, 1, 1, SPRITE_NO_ANIMATION);       
+		    load_sprite(&centro_oam, &OBJ_0Tiles, Sol, 1, 1, SPRITE_NO_ANIMATION);
 		}else if(get_time() == (302 * SECOND)/100) {	//Retardo 2/100 seg.
 			BLDCNT = 0x81;
 			BLDY = 1;		
@@ -86,16 +86,17 @@ bool intro_main()
 		} else if (get_time() == (312 * SECOND)/100) {	//Retardo 2/100 seg.
 			BLDY = 4;		
 		} else if (get_time() == (313 * SECOND)/100) {	//Retardo 1/100 seg.
+			PlayBGM(321);			
 			move_bg(3,0,-1);		
 			move_bg(2,0,-1);		
 		} else if (get_time() == (318 * SECOND)/100) {	//Retardo 5/100 seg.
-			BLDY = 5;		
+			BLDY = 5;
 		} else if (get_time() == (320 * SECOND)/100) {	//Retardo 2/100 seg.
 			move_sprite(Sol, 0, -1);					
 		} else if (get_time() == (321 * SECOND)/100) {	//Retardo 1/100 seg.
 			move_bg(3,0,-1);		
 		} else if (get_time() == (322 * SECOND)/100) {	//Retardo 1/100 seg.
-			BLDY = 6;		
+			BLDY = 6;			
 		} else if (get_time() == (328 * SECOND)/100) {	//Retardo 6/100 seg.
 			move_bg(3,0,-1);		
 			move_bg(2,0,-1);		
@@ -106,7 +107,7 @@ bool intro_main()
 		} else if (get_time() == (336 * SECOND)/100) {	//Retardo 2/100 seg.
 			move_bg(3,0,-1);		
 		} else if (get_time() == (338 * SECOND)/100) {	//Retardo 2/100 seg.
-			BLDY = 9;		
+			BLDY = 9;			
 		} else if (get_time() == (340 * SECOND)/100) {	//Retardo 2/100 seg.
 			move_sprite(Sol, 0, -1);					
 		} else if (get_time() == (343 * SECOND)/100) {	//Retardo 3/100 seg.
@@ -137,7 +138,7 @@ bool intro_main()
 			move_bg(3,0,-1);		
 			move_bg(2,0,-1);		
 		} else if (get_time() == (374 * SECOND)/100) {	//Retardo 1/100 seg.
-			BLDY = 15;		
+			BLDY = 15;			
 		} else if (get_time() == (380 * SECOND)/100) {	//Retardo 6/100 seg.
 			move_sprite(Sol, 0, -1);					
 		} else if (get_time() == (381 * SECOND)/100) {	//Retardo 1/100 seg.
@@ -277,6 +278,7 @@ bool intro_main()
 		} else if (get_time() == (797 * SECOND)/100) {		//Retardo 185/100 seg. 
 			DISPCNT = DISPCNT + 0x100; 						// Habilita el blanco forzado
 			DISPCNT = 0x1741;								// Cambia el video a modo 1
+			PlayBGM(277);
 		} else if (get_time() == (990 * SECOND)/100) {
 			fadescreen_white();  							// duración 16/100 seg
 		} else if (get_time() == (1020 * SECOND)/100) {
@@ -1280,6 +1282,7 @@ bool intro_main()
 			fadescreen();
 		} else if (get_time() == ((1850) * SECOND)/100){
 			clear_bgs();
+			PlayBGM(277);
 			DISPCNT = 0x1FC0;
 			set_bg_config_2();
 			DISPCNT = 0x1F40;

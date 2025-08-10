@@ -4,6 +4,7 @@
 
 extern void exit_intro(void);
 bool intro_main();
+#define PlayBGM(songNum) ((void (*)(u16))(0x080722A0 | 1))(songNum)
 
 
 void init_intro_master(struct IntroSt ** pointer)
@@ -36,9 +37,10 @@ void not_main()
         vblank_handler_set(vblank_function);
         init_intro_master(&intro_master); 
         set_bg_config();
+		PlayBGM(321);
         
     } 
-   
+
     if (intro_main())
     {
         free_intro_master(&intro_master);
